@@ -3,4 +3,6 @@ This repository hosts the code for identifying overshoot drought using the dynam
 
 The detailed description of this method can be found in the Nature Ecology & Evolution paper by Yao ZHANG, Trevor KEENAN, and Sha ZHOU.
 
+**References**
+
 Zhang, Y., Keenan, T.F., Zhou, S., Exacerbated drought impacts on global ecosystems due to structural overshoot, Nature Ecology & Evolution, 2021.
