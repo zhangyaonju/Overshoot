@@ -439,6 +439,7 @@ get_normalized<-function(vec){
   return(vec[1:750]/vec[751])
 }
 
+
 if (ind_speed_for_drought_dev){
   ### get the drought events and the deseasonalized detrended NDVI anomaly
   ncin<-nc_open(paste0("./analysis/gimms/gimms.component_pred.",out_label,".spinup5.rep2.delta0.98.nc"))
@@ -469,8 +470,7 @@ if (ind_speed_for_drought_dev){
   save(decrease_speed1,decrease_speed2,decrease_speed3,drought_length,develop_length,start_timing,minimum_timing,
        file=paste0("./analysis/gimms_overshoot_",substr(out_label,1,11),"/",out_label,"_decreasespeed_droughtlength_developlength_method2_spei05.RData"))
   
-  
-  # get time series of drought development  ---------------------------------
+  # get time series of drought development
   
   load(paste0("./analysis/gimms_overshoot_",substr(out_label,1,11),"/",out_label,"_overshoot_method2_1_414_spei05.RData"))
   #ndvidat<-abind(sum_drought_ndvi,overshoot_boolean,along=1)
@@ -489,13 +489,6 @@ if (ind_speed_for_drought_dev){
        file=paste0("./analysis/gimms_overshoot_",substr(out_label,1,11),"/",out_label,"_decrease_time_series_method2_spei05.RData"))
   
   ### get area of interest
-  # cords<-t(array(c(63,70,-140,-150,
-  #                  33,43,-93,-83,
-  #                  -16,-6,-58,-48,
-  #                  -25,-15,15,25,
-  #                  18,28,78,88,
-  #                  65,75,100,115),
-  #                dim=c(4,6)))
   
   cords<-t(array(c(63,70,-140,-150,
                    33,43,-98,-88,
@@ -520,7 +513,7 @@ if (ind_speed_for_drought_dev){
   save(regions_ts,regions_normalized_ts,
        file=paste0("./analysis/gimms_overshoot_",substr(out_label,1,11),"/",out_label,"_6region_ts_changes_method2_spei05.RData"))
   
-  # test the speed of drought development -----------------------------------
+  # test the speed of drought development
   
   file1=paste0("./analysis/gimms_overshoot_",substr(out_label,1,11),"/",out_label,"_decreasespeed_droughtlength_developlength_method2_spei05.RData")
   load(file1)
@@ -542,6 +535,8 @@ if (ind_speed_for_drought_dev){
        file=paste0("./analysis/gimms_overshoot_",substr(out_label,1,11),"/",out_label,"_test_decreasespeed_droughtlength_developlength_mehtod2_spei05.RData"))
   
 }
+
+# ANOVA overshoot impact 3 model-----------------------------------------------
 
 
 change_res<-function(mat){  # matsize = 50,720,360
@@ -771,11 +766,6 @@ get_overshoot_timing_stat<-function(vec){
 ### get os timing and phenology
 
 if (ind_os_nos_timing){
-  # posras<-raster("~/Documents/Data/phenology/pog_hd.tif")
-  # pos<-t(as.matrix(posras)[360:1,])
-  # lgsras<-raster("~/Documents/Data/phenology/lgs_hd.tif")
-  # lgs<-t(as.matrix(lgsras)[360:1,])
-  # save(pos,lgs,file="~/Documents/Data/phenology/pheno_hd.RData")
   load("./Data/pheno_hd.RData")
   file=paste0("./analysis/gimms_overshoot_",substr(out_label,1,11),"/",out_label,"_decreasespeed_droughtlength_developlength_method2_spei05.RData")
   load(file)
@@ -800,8 +790,6 @@ if (ind_os_nos_timing){
 
 
 # get overshoot time and corresponding temperature ------------------------
-
-
 get_overshoot_tmp_stat<-function(vec){
   t_test<-function(a,b=rep(0,length(a))){
     if (sum(!is.na(a))>=1&sum(!is.na(b))>=1){
