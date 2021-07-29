@@ -64,8 +64,14 @@ get_r_square<-function(vec){
 # d. SPEI value should be smaller than -0.5
 
 
-# for test
-# vec<-c(obs_de,spei_ts,predmean_ts[121:534,9],component_ts[121:534,10],component_ts[121:534,11])
+### input: a. vegetation index (VI) time series
+###        b. SPEI
+###        c. precipitation sensitivity
+###        d. temperature sensitivity
+###        e. precipitation contribution
+###        f. temperature contribution
+###        g. mean vegetation index
+###
 drought_identify<-function(vec){
   n_obs <- (length(vec)-1)/6
   ### use both the threshold and the spei to determine the drought events
@@ -182,7 +188,8 @@ if (ind_calculate_drought){
 ###        b. drought NDVI deseason detrend 
 ###        c. drought SPEI3 
 ###        d. DLM avg coef 
-###        e. DLM avg component
+###        e. upper limit of DLM coef (coef+uncertainty)
+###        f. DLM avg component
 ###
 evaluate_overshoot<-function(vec){
   ## negative contribution from previous month greater than negative from current months.
@@ -214,7 +221,7 @@ evaluate_overshoot<-function(vec){
       mean_coef_upper<-min(coef_upper[drought_id],na.rm=T)
       comp_drought_ndvi[i] <-sum(comp[drought_id],na.rm=T)
       overshoot_drought_boolean[i]<-(mean_coef<0)&(comp_drought_ndvi[i]<0)&(mean_coef_upper<0)&
-        (min(comp[drought_id],na.rm=T)< -0.02*meanvi)    # this may still need some discussion
+        (min(comp[drought_id],na.rm=T)< -0.02*meanvi)   
       if (overshoot_drought_boolean[i]==1){
         overshoot_ts_count[drought_id]<-over_count
         over_count <- over_count+1
@@ -228,6 +235,14 @@ evaluate_overshoot<-function(vec){
   }
 }
 
+
+### input: a. drought identifier 
+###        b. drought deseason detrended NDVI
+###        c. DLM predicted deseaon detrended NDVI anomaly
+###        d. DLM predicted reference NDVI
+###        e. SPEI
+###        f. soil moisture
+###
 get_drought_stat<-function(vec){
   n_obs<-length(vec)/6
   if (sum(is.na(vec))>n_obs*0.9*6){
@@ -273,6 +288,10 @@ get_drought_stat<-function(vec){
 }
 
 # 1.3 identify all overshoot events separately ----------------------------------
+### input: a. range of time period being assessed
+###        b. NDVI component being evaluated
+###        c. output file
+###
 
 get_overshoot_for_each_component<-function(t_range,var_comp,outfile){   # t_range 7:210,  211:414
   ### get stat period and for each component
@@ -292,6 +311,9 @@ get_overshoot_for_each_component<-function(t_range,var_comp,outfile){   # t_rang
   save(overshoot_ts_count,comp_avg_overshoot_contri,comp_drought_ndvi,overshoot_drought_boolean,
        file=outfile)
 }
+
+### input: a. range of time period being assessed
+###        c. output file
 
 evaluate_drought_impact<-function(t_range,outfile){   # t_range 7:210,  211:414
   ### get stat period and for each component
@@ -413,7 +435,7 @@ if(ind_evaluate_drought){
 
 
 # 1.4 overshoot identification ----------------------------------------
-### this is the second method used to identify overshoot, the results from the first step is further filtered.
+### this is the second step used to identify overshoot, the results from the first step is further filtered.
 ##  two algorithms are adopted here. 
 #   1. the overshoot related component should have overall larger effect than any other lagged effects
 #   2. the overshoot component should be smaller than the standard deviation 
