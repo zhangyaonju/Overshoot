@@ -5,4 +5,5 @@
 3. ``get_component_from_DLM.R`` generates the component (contribution) of each independent variable. These components will be further used for overshoot identification. 
 
 **References**
+
 Liu, Y., Kumar, M., Katul, G.G., Porporato, A., 2019. Reduced resilience as an early warning signal of forest mortality. Nat. Clim. Chang. 9, 880–885. https://doi.org/10.1038/s41558-019-0583-9
