@@ -4,4 +4,4 @@
 ---------------------------------------------------
 >``drought_identify`` functions used to identify drought event for each pixel. 
 >**Inputs** vegetation index (VI) time series, SPEI, precipitation sensitivity, temeprature sensitivity, precipitation contribution, temeprature contribution from DLM, and mean vegetation index.
->**Outputs**
+>**Outputs** drought 
