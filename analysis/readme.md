@@ -1,5 +1,5 @@
 ## Overshoot identification
-### file description
+### File description
 **``identify_overshoot.R``**  contains functions for overshoot drought identification. Some of the major functions are described below.
 
 >``drought_identify`` functions used to identify drought event for each pixel. 
