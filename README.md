@@ -5,4 +5,4 @@ The detailed description of this method can be found in the Nature Ecology & Evo
 
 **References**
 
-Zhang, Y., Keenan, T.F., Zhou, S., Exacerbated drought impacts on global ecosystems due to structural overshoot, Nature Ecology & Evolution, 2021.
+Zhang, Y., Keenan, T.F., Zhou, S., Exacerbated drought impacts on global ecosystems due to structural overshoot, Nature Ecology & Evolution, 2021.  https://doi.org/10.1038/s41559-021-01551-8
